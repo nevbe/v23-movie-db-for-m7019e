@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="review"
+            type="com.ltu.m7019e.v23.themoviedb.model.Review" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="300dp"
+        android:layout_height="240dp"
+        app:cardElevation="5dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/movie_list_item_cl"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/review_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                tools:text="Author "
+                android:textSize="18sp"
+                android:text="@{review.author}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/review_created_at"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                tools:text="Review date"
+                android:text="@{review.createdAt}"
+                app:layout_constraintStart_toStartOf="@id/review_author"
+                app:layout_constraintTop_toBottomOf="@+id/review_author" />
+
+            <TextView
+                android:id="@+id/review_content"
+                android:maxLines="8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/review_created_at"
+                app:layout_constraintStart_toStartOf="@id/review_author"
+                android:text="@{review.content}"
+                tools:text="Content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="movie"
+            type="com.ltu.m7019e.v23.themoviedb.model.Movie" />
+
+        <variable
+            name="viewModel"
+            type="com.ltu.m7019e.v23.themoviedb.viewmodel.MovieDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MovieDetailFragment">
+
+        <ImageView
+            android:id="@+id/movie_detail_backdrop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:backdropImageUrl="@{movie.backdropPath}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/movie_detail_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{movie.title}"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_detail_backdrop" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/genre_list_rv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:scrollbars="none|horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_detail_title" />
+
+
+        <Button
+            android:id="@+id/visit_movie_site"
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="72dp"
+            android:text="@string/visit_site"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/visit_imdb"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/genre_list_rv" />
+
+        <Button
+            android:id="@+id/visit_imdb"
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="72dp"
+            android:text="@string/visit_imdb"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toEndOf="@id/visit_movie_site"
+            app:layout_constraintTop_toBottomOf="@id/genre_list_rv" />
+
+        <Button
+            android:id="@+id/back_to_movie_list"
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/previous"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/to_third_fragment"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/to_third_fragment"
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/visit_third_fragment"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/back_to_movie_list" />
+
+        <Button
+            android:id="@+id/save_to_database"
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="@{ () -> viewModel.onSaveMovieButtonClicked(movie)}"
+            android:text="@string/save_locally"
+            android:visibility="@{viewModel.isFavorite ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/back_to_movie_list"
+            app:layout_constraintEnd_toStartOf="@+id/remove_from_database"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/remove_from_database"
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="@{ () -> viewModel.onRemoveMovieButtonClicked(movie)}"
+            android:text="@string/remove_locally"
+            android:visibility="@{viewModel.isFavorite ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/back_to_movie_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/save_to_database" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
