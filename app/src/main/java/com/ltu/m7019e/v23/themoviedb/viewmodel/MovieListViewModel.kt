@@ -1,17 +1,14 @@
 package com.ltu.m7019e.v23.themoviedb.viewmodel
 
 import android.app.Application
-import android.net.ConnectivityManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.ltu.m7019e.v23.themoviedb.data.DefaultAppContainer
 import com.ltu.m7019e.v23.themoviedb.data.MovieRepository
-import com.ltu.m7019e.v23.themoviedb.database.MovieDatabaseDao
 import com.ltu.m7019e.v23.themoviedb.model.Movie
 import com.ltu.m7019e.v23.themoviedb.network.DataFetchStatus
-import com.ltu.m7019e.v23.themoviedb.network.NetworkCallbackImpl
+import com.ltu.m7019e.v23.themoviedb.network.NetworkCheck
 import kotlinx.coroutines.launch
 
 class MovieListViewModel(
@@ -19,7 +16,7 @@ class MovieListViewModel(
     application: Application) : AndroidViewModel(application) {
 
 
-    private val networkCallback = NetworkCallbackImpl(movieRepository, application)
+    private val networkCallback = NetworkCheck(movieRepository, application)
 
     fun unregisterNetworkCallback() {
         networkCallback.unregister()

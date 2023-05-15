@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NetworkCallbackImpl(val movieRepository: MovieRepository, private val context: Context) : ConnectivityManager.NetworkCallback() {
+class NetworkCheck(val movieRepository: MovieRepository, private val context: Context) : ConnectivityManager.NetworkCallback() {
 
     private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
